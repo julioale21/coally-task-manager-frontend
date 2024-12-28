@@ -6,7 +6,7 @@ import {
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { Task } from "@/app/home/page";
+import { Task } from "@/app/types";
 
 interface TaskItemProps {
   task: Task;
@@ -80,4 +80,4 @@ const TaskItem: React.FC<TaskItemProps> = ({
   );
 };
 
-export default TaskItem;
+export { TaskItem };

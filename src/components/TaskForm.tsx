@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
-import { Task } from "@/app/home/page";
+import { Task } from "@/app/types";
 
 interface TaskFormProps {
   onAddTask: (task: { title: string; description: string }) => void;
@@ -89,4 +89,4 @@ const TaskForm: React.FC<TaskFormProps> = ({
   );
 };
 
-export default TaskForm;
+export { TaskForm };

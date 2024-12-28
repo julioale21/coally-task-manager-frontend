@@ -1,6 +1,6 @@
 import React from "react";
-import TaskItem from "./TaskItem";
-import { Task } from "@/app/home/page";
+import { TaskItem } from "./";
+import { Task } from "@/app/types";
 
 interface TaskListProps {
   tasks: Task[];
@@ -39,4 +39,4 @@ const TaskList: React.FC<TaskListProps> = ({
   );
 };
 
-export default TaskList;
+export { TaskList };

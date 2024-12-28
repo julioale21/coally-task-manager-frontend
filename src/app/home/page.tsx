@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import TaskForm from "@/components/TaskForm";
-import TaskList from "@/components/TaskList";
+import { Task } from "../types";
+import { TaskForm, TaskList } from "@/components";
 
 const mockTasks: Task[] = [
   {
@@ -34,14 +34,6 @@ const mockTasks: Task[] = [
     createdAt: new Date(),
   },
 ];
-
-export interface Task {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-  createdAt: Date;
-}
 
 const Home: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(mockTasks);
