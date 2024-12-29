@@ -3,59 +3,41 @@
 import React, { useState } from "react";
 import { Task } from "../types";
 import { TaskForm, TaskList } from "@/components";
-
-const mockTasks: Task[] = [
-  {
-    id: 1,
-    title: "Tarea 1",
-    description: "Descripción de la tarea 1",
-    completed: false,
-    createdAt: new Date(),
-  },
-  {
-    id: 2,
-    title: "Tarea 2",
-    description: "Descripción de la tarea 2",
-    completed: true,
-    createdAt: new Date(),
-  },
-  {
-    id: 3,
-    title: "Tarea 3",
-    description: "Descripción de la tarea 3",
-    completed: false,
-    createdAt: new Date(),
-  },
-  {
-    id: 4,
-    title: "Tarea 4",
-    description: "Descripción de la tarea 4",
-    completed: true,
-    createdAt: new Date(),
-  },
-];
+import { useQueryTasks } from "../hooks/tanstack/useQeuryTasks";
+import { useMutateCreateTask } from "../hooks/tanstack/useMutateCreateTask";
+import { useCustomSnackbar } from "@/common/hooks/useCustomSnackbar";
 
 const Home: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>(mockTasks);
+  const { data: tasks = [], isLoading, isError } = useQueryTasks();
+  const { mutate: createTask } = useMutateCreateTask();
+  const { showSuccess, showError } = useCustomSnackbar();
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
-  const handleAddTask = (taskData: { title: string; description: string }) => {
-    const newTask: Task = {
-      id: Date.now(),
+  const handleAddTask = async (taskData: {
+    title: string;
+    description: string;
+  }) => {
+    const newTask = {
       title: taskData.title,
       description: taskData.description,
-      completed: false,
-      createdAt: new Date(),
     };
-    setTasks([...tasks, newTask]);
+
+    createTask(newTask, {
+      onError: () => {
+        showError("Error al crear la tarea");
+      },
+      onSuccess: () => {
+        showSuccess("Tarea creada con éxito");
+      },
+    });
   };
 
   const handleToggleCompletion = (taskId: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
-      )
-    );
+    // setTasks(
+    //   tasks.map((task) =>
+    //     task.id === taskId ? { ...task, completed: !task.completed } : task
+    //   )
+    // );
   };
 
   const handleEditTask = (task: Task) => {
@@ -66,20 +48,28 @@ const Home: React.FC = () => {
     taskId: number,
     updatedData: { title: string; description: string }
   ) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, ...updatedData } : task
-      )
-    );
-    setEditingTask(null);
+    // setTasks(
+    //   tasks.map((task) =>
+    //     task.id === taskId ? { ...task, ...updatedData } : task
+    //   )
+    // );
+    // setEditingTask(null);
   };
 
   const handleDeleteTask = (taskId: number) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
+    // setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
-  const pendingTasks = tasks.filter((task) => !task.completed);
-  const completedTasks = tasks.filter((task) => task.completed);
+  const pendingTasks = tasks?.filter((task) => !task.status) || [];
+  const completedTasks = tasks?.filter((task) => task.status) || [];
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white py-8 px-4">

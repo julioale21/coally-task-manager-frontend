@@ -19,7 +19,7 @@ const TaskList: React.FC<TaskListProps> = ({
     return (
       <div className="text-center py-8 text-gray-400 bg-gray-800 rounded-lg">
         No hay tareas{" "}
-        {tasks.some((t) => t.completed) ? "completadas" : "pendientes"}
+        {tasks.some((t) => t.status) ? "completadas" : "pendientes"}
       </div>
     );
   }
@@ -28,7 +28,7 @@ const TaskList: React.FC<TaskListProps> = ({
     <div className="space-y-4">
       {tasks.map((task) => (
         <TaskItem
-          key={task.id}
+          key={task._id}
           task={task}
           onToggleCompletion={onToggleCompletion}
           onEditTask={onEditTask}

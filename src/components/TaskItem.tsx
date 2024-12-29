@@ -2,9 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
-  faTimes,
   faEdit,
   faTrash,
+  faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { Task } from "@/app/types";
 
@@ -28,35 +28,38 @@ const TaskItem: React.FC<TaskItemProps> = ({
           <div className="flex-grow">
             <h3
               className={`font-semibold ${
-                task.completed ? "text-gray-400 line-through" : "text-white"
+                task.status ? "text-gray-400 line-through" : "text-white"
               }`}
             >
               {task.title}
             </h3>
             <p
               className={`text-sm mt-1 ${
-                task.completed ? "text-gray-500" : "text-gray-400"
+                task.status ? "text-gray-500" : "text-gray-400"
               }`}
             >
               {task.description}
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              Creada: {task.createdAt.toLocaleDateString()}
+              {/* Creada: {task.createdAt.toLocaleDateString()} */}
             </p>
           </div>
         </div>
 
         <div className="flex gap-2 justify-end">
           <button
-            onClick={() => onToggleCompletion(task.id)}
+            onClick={() => onToggleCompletion(task._id as number)}
             className={`p-2 rounded-lg transition-colors ${
-              task.completed
-                ? "bg-green-600/20 text-green-500 hover:bg-green-600/30"
-                : "bg-gray-700 text-gray-400 hover:text-white hover:bg-gray-600"
+              task.status
+                ? "bg-orange-600/20 text-orange-500 hover:bg-orange-600/30"
+                : "bg-green-600/20 text-green-500 hover:bg-green-600/30"
             }`}
+            title={
+              task.status ? "Marcar como pendiente" : "Marcar como completada"
+            }
           >
             <FontAwesomeIcon
-              icon={task.completed ? faCheck : faTimes}
+              icon={task.status ? faRotateLeft : faCheck}
               className="w-4 h-4"
             />
           </button>
@@ -64,13 +67,15 @@ const TaskItem: React.FC<TaskItemProps> = ({
           <button
             onClick={() => onEditTask(task)}
             className="p-2 rounded-lg bg-blue-600/20 text-blue-500 hover:bg-blue-600/30 transition-colors"
+            title="Editar tarea"
           >
             <FontAwesomeIcon icon={faEdit} className="w-4 h-4" />
           </button>
 
           <button
-            onClick={() => onDeleteTask(task.id)}
+            onClick={() => onDeleteTask(task._id as number)}
             className="p-2 rounded-lg bg-red-600/20 text-red-500 hover:bg-red-600/30 transition-colors"
+            title="Eliminar tarea"
           >
             <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
           </button>
