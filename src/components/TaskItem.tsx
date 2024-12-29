@@ -41,7 +41,14 @@ const TaskItem: React.FC<TaskItemProps> = ({
               {task.description}
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              {/* Creada: {task.createdAt.toLocaleDateString()} */}
+              Creada:{" "}
+              {task.createdAt
+                ? new Date(task.createdAt).toLocaleDateString("es-ES", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })
+                : ""}
             </p>
           </div>
         </div>

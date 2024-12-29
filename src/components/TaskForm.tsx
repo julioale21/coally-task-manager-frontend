@@ -31,7 +31,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
     e.preventDefault();
     if (title.trim()) {
       if (editingTask) {
-        onUpdateTask(editingTask.id, { title, description });
+        onUpdateTask(editingTask._id as number, { title, description });
       } else {
         onAddTask({ title, description });
       }

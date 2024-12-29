@@ -7,11 +7,13 @@ import { useQueryTasks } from "../hooks/tanstack/useQeuryTasks";
 import { useMutateCreateTask } from "../hooks/tanstack/useMutateCreateTask";
 import { useCustomSnackbar } from "@/common/hooks/useCustomSnackbar";
 import { useMutateUpdateTask } from "../hooks/tanstack/useMutateUpdateTask";
+import { useMutateDeleteTask } from "../hooks/tanstack/useMutateDeleteTask";
 
 const Home: React.FC = () => {
   const { data: tasks = [], isLoading, isError } = useQueryTasks();
   const { mutate: createTask } = useMutateCreateTask();
   const { mutate: updateTask } = useMutateUpdateTask();
+  const { mutate: deleteTask } = useMutateDeleteTask();
   const { showSuccess, showError } = useCustomSnackbar();
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
@@ -61,16 +63,31 @@ const Home: React.FC = () => {
     taskId: number,
     updatedData: { title: string; description: string }
   ) => {
-    // setTasks(
-    //   tasks.map((task) =>
-    //     task.id === taskId ? { ...task, ...updatedData } : task
-    //   )
-    // );
-    // setEditingTask(null);
+    updateTask(
+      {
+        id: taskId.toString(),
+        task: updatedData,
+      },
+      {
+        onError: () => {
+          showError("Error al actualizar la tarea");
+        },
+        onSuccess: () => {
+          showSuccess("Tarea actualizada conxito");
+        },
+      }
+    );
   };
 
   const handleDeleteTask = (taskId: number) => {
-    // setTasks(tasks.filter((task) => task.id !== taskId));
+    deleteTask(taskId.toString(), {
+      onError: () => {
+        showError("Error al eliminar la tarea");
+      },
+      onSuccess: () => {
+        showSuccess("Tarea eliminada conxito");
+      },
+    });
   };
 
   const pendingTasks = tasks?.filter((task) => !task.status) || [];

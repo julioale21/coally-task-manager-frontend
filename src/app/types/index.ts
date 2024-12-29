@@ -3,7 +3,7 @@ export interface Task {
   title: string;
   description: string;
   status?: boolean;
-  createdAt?: Date;
+  createdAt?: string;
 }
 
 export type UpdateTaskDto = Partial<Omit<Task, "_id">>;
