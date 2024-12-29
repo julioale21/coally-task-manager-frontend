@@ -25,10 +25,10 @@ export const useTask = () => {
 
     createTask(newTask, {
       onError: () => {
-        showError("Error al crear la tarea");
+        showError("Error creating task");
       },
       onSuccess: () => {
-        showSuccess("Tarea creada con éxito");
+        showSuccess("Task successfully created");
       },
     });
   };
@@ -43,10 +43,10 @@ export const useTask = () => {
       },
       {
         onError: () => {
-          showError("Error al cambiar el estado de la tarea");
+          showError("Error updating task status");
         },
         onSuccess: () => {
-          showSuccess("Estado de la tarea cambiado con éxito");
+          showSuccess("Task status updated successfully");
         },
       }
     );
@@ -67,10 +67,10 @@ export const useTask = () => {
       },
       {
         onError: () => {
-          showError("Error al actualizar la tarea");
+          showError("Error updating task");
         },
         onSuccess: () => {
-          showSuccess("Tarea actualizada conxito");
+          showSuccess("Task successfully updated");
         },
       }
     );
@@ -79,10 +79,10 @@ export const useTask = () => {
   const handleDeleteTask = (taskId: number) => {
     deleteTask(taskId.toString(), {
       onError: () => {
-        showError("Error al eliminar la tarea");
+        showError("Error deleting task");
       },
       onSuccess: () => {
-        showSuccess("Tarea eliminada conxito");
+        showSuccess("Task successfully deleted");
       },
     });
   };

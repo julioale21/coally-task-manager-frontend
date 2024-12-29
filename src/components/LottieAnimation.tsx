@@ -13,4 +13,4 @@ const LottieAnimation = () => {
   );
 };
 
-export { LottieAnimation };
+export default LottieAnimation;

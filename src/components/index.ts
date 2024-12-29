@@ -1,5 +1,4 @@
 export { Pagination } from "./Pagination";
-export { LottieAnimation } from "./LottieAnimation";
 export { LoginForm } from "./LoginForm";
 export { ErrorAlert } from "./ErrorAlert";
 export { Header } from "./Header";
