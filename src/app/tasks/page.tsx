@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { TaskForm, TaskList } from "@/components";
+import { ErrorBanner, Loading, TaskForm, TaskList } from "@/components";
 import { useTask } from "./hooks/useTask";
 
 const Home: React.FC = () => {
@@ -19,11 +19,11 @@ const Home: React.FC = () => {
   } = useTask();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <div>Error</div>;
+    return <ErrorBanner message="Error fetching tasks" />;
   }
 
   return (
@@ -31,7 +31,6 @@ const Home: React.FC = () => {
       <div className="container mx-auto max-w-5xl">
         <h1 className="text-4xl font-bold mb-8 text-center">Task Manager</h1>
 
-        {/* Formulario */}
         <div className="mb-12">
           <TaskForm
             onAddTask={handleAddTask}

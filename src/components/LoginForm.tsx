@@ -1,73 +1,20 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import { ErrorAlert } from ".";
+import { useLogin } from "@/app/login/hooks/useLogin";
 
-const ErrorAlert = ({ message }: { message: string }) => (
-  <div className="bg-red-900/10 border-l-4 border-red-500 p-4 rounded-md">
-    <div className="flex">
-      <div className="flex-shrink-0">
-        <svg
-          className="h-5 w-5 text-red-500"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
-      <div className="ml-3">
-        <p className="text-sm text-red-400">{message}</p>
-      </div>
-    </div>
-  </div>
-);
-
-interface LoginFormInputs {
-  email: string;
-  password: string;
-}
-
-export default function LoginForm() {
-  const router = useRouter();
-  const [error, setError] = useState<string>("");
-  const [showPassword, setShowPassword] = useState(false);
+const LoginForm = () => {
   const {
+    error,
+    showPassword,
+    setShowPassword,
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginFormInputs>();
-
-  const onSubmit = async (data: LoginFormInputs) => {
-    try {
-      const result = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        setError(
-          "Ocurrio un error al iniciar sesion. Revisa tu email y contraseña."
-        );
-        return;
-      }
-
-      router.push("/tasks");
-      router.refresh();
-    } catch (err) {
-      console.log(err);
-      setError(
-        "Ocurrio un error al iniciar sesion. Revisa tu email y contraseña."
-      );
-    }
-  };
+    errors,
+    onSubmit,
+    isSubmitting,
+  } = useLogin();
 
   return (
     <div className="max-w-md w-full space-y-8">
@@ -156,4 +103,6 @@ export default function LoginForm() {
       </form>
     </div>
   );
-}
+};
+
+export { LoginForm };

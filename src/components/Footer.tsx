@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const getCurrentYear = () => new Date().getFullYear();
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="bg-[#1a1f2e] border-t border-gray-800">
       <div className="container mx-auto px-4 py-8">
@@ -67,4 +67,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export { Footer };
