@@ -3,7 +3,7 @@
 import Lottie from "lottie-react";
 import animationData from "../animations/custom-animation.json";
 
-export default function LottieAnimation() {
+const LottieAnimation = () => {
   return (
     <Lottie
       animationData={animationData}
@@ -11,4 +11,6 @@ export default function LottieAnimation() {
       className="w-full h-[550px]"
     />
   );
-}
+};
+
+export { LottieAnimation };

@@ -1,49 +1,6 @@
-// import React from "react";
-// import { TaskItem } from "./";
-// import { Task } from "@/app/types";
-
-// interface TaskListProps {
-//   tasks: Task[];
-//   onToggleCompletion: (taskId: number) => void;
-//   onEditTask: (task: Task) => void;
-//   onDeleteTask: (taskId: number) => void;
-// }
-
-// const TaskList: React.FC<TaskListProps> = ({
-//   tasks,
-//   onToggleCompletion,
-//   onEditTask,
-//   onDeleteTask,
-// }) => {
-//   if (tasks.length === 0) {
-//     return (
-//       <div className="text-center py-8 text-gray-400 bg-gray-800 rounded-lg">
-//         No hay tareas{" "}
-//         {tasks.some((t) => t.status) ? "completadas" : "pendientes"}
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="space-y-4">
-//       {tasks.map((task) => (
-//         <TaskItem
-//           key={task._id}
-//           task={task}
-//           onToggleCompletion={onToggleCompletion}
-//           onEditTask={onEditTask}
-//           onDeleteTask={onDeleteTask}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export { TaskList };
 import React from "react";
 import { Task } from "@/app/types";
-import { TaskItem } from "./TaskItem";
-import { Pagination } from "./Pagination";
+import { Pagination, TaskItem } from "./";
 
 interface TaskListProps {
   tasks: Task[];
