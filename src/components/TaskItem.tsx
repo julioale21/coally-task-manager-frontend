@@ -1,11 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCheck,
+  faSquareCheck,
   faEdit,
   faTrash,
-  faRotateLeft,
+  faArrowRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { Task } from "@/app/types";
 
 interface TaskItemProps {
@@ -41,7 +42,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
               {task.description}
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              Creada:{" "}
+              Created:{" "}
               {task.createdAt
                 ? new Date(task.createdAt).toLocaleDateString("es-ES", {
                     day: "2-digit",
@@ -59,14 +60,14 @@ const TaskItem: React.FC<TaskItemProps> = ({
             className={`p-2 rounded-lg transition-colors ${
               task.status
                 ? "bg-orange-600/20 text-orange-500 hover:bg-orange-600/30"
-                : "bg-green-600/20 text-green-500 hover:bg-green-600/30"
+                : "bg-green-600/20 text-gray-500 hover:bg-green-600/30"
             }`}
             title={
               task.status ? "Marcar como pendiente" : "Marcar como completada"
             }
           >
             <FontAwesomeIcon
-              icon={task.status ? faRotateLeft : faCheck}
+              icon={task.status ? faArrowRotateLeft : faSquareCheck}
               className="w-4 h-4"
             />
           </button>

@@ -45,14 +45,14 @@ const TaskForm: React.FC<TaskFormProps> = ({
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="title" className="text-sm font-medium text-gray-300">
-            Título
+            Title
           </label>
           <input
             id="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Ingrese el título de la tarea"
+            placeholder="Enter the title of the task"
             className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
           />
         </div>
@@ -62,13 +62,13 @@ const TaskForm: React.FC<TaskFormProps> = ({
             htmlFor="description"
             className="text-sm font-medium text-gray-300"
           >
-            Descripción
+            Description
           </label>
           <textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Ingrese la descripción de la tarea"
+            placeholder="Enter the description of the task"
             rows={3}
             className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
           />
@@ -82,7 +82,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
             icon={editingTask ? faSave : faPlus}
             className="w-4 h-4"
           />
-          {editingTask ? "Actualizar Tarea" : "Agregar Tarea"}
+          {editingTask ? "Update Task" : "Add Task"}
         </button>
       </form>
     </div>

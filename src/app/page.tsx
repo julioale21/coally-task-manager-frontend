@@ -27,10 +27,10 @@ export default function Home() {
           inspired by Material Design principles.
         </p>
         <Link
-          href="/tasks"
+          href="/login"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full shadow-md transition duration-200"
         >
-          Go to Tasks
+          Go to app
         </Link>
       </main>
 
