@@ -5,3 +5,5 @@ export interface Task {
   status?: boolean;
   createdAt?: Date;
 }
+
+export type UpdateTaskDto = Partial<Omit<Task, "_id">>;

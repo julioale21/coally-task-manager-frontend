@@ -6,10 +6,12 @@ import { TaskForm, TaskList } from "@/components";
 import { useQueryTasks } from "../hooks/tanstack/useQeuryTasks";
 import { useMutateCreateTask } from "../hooks/tanstack/useMutateCreateTask";
 import { useCustomSnackbar } from "@/common/hooks/useCustomSnackbar";
+import { useMutateUpdateTask } from "../hooks/tanstack/useMutateUpdateTask";
 
 const Home: React.FC = () => {
   const { data: tasks = [], isLoading, isError } = useQueryTasks();
   const { mutate: createTask } = useMutateCreateTask();
+  const { mutate: updateTask } = useMutateUpdateTask();
   const { showSuccess, showError } = useCustomSnackbar();
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
@@ -33,11 +35,22 @@ const Home: React.FC = () => {
   };
 
   const handleToggleCompletion = (taskId: number) => {
-    // setTasks(
-    //   tasks.map((task) =>
-    //     task.id === taskId ? { ...task, completed: !task.completed } : task
-    //   )
-    // );
+    updateTask(
+      {
+        id: taskId.toString(),
+        task: {
+          status: !tasks.find((task) => task._id === taskId)?.status,
+        },
+      },
+      {
+        onError: () => {
+          showError("Error al cambiar el estado de la tarea");
+        },
+        onSuccess: () => {
+          showSuccess("Estado de la tarea cambiado con éxito");
+        },
+      }
+    );
   };
 
   const handleEditTask = (task: Task) => {

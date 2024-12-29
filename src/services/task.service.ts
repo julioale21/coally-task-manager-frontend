@@ -1,4 +1,4 @@
-import { Task } from "@/app/types";
+import { Task, UpdateTaskDto } from "@/app/types";
 import { axiosInstance } from "@/config/axios";
 
 export const tasksService = {
@@ -31,6 +31,19 @@ export const tasksService = {
     } catch (error) {
       console.error("Error fetching task:", error);
       throw new Error("Failed to fetch tassk");
+    }
+  },
+
+  async updateTask(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
+    try {
+      const response = await axiosInstance.patch<Task>(
+        `/tasks/${id}`,
+        updateTaskDto
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error updating task:", error);
+      throw new Error("Failed to update task");
     }
   },
 
