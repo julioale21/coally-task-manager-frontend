@@ -1,8 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import Lottie from "lottie-react";
-import animationData from "../animations/custom-animation.json";
+
+const LottieAnimation = dynamic(() => import("../components/LottieAnimation"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -17,11 +20,7 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col gap-8 items-center">
-        <Lottie
-          animationData={animationData}
-          loop={true}
-          className="w-full h-[550px]"
-        />
+        <LottieAnimation />
         <p className="text-lg sm:text-xl text-center max-w-lg">
           This app allows you to create, manage, and track your tasks easily and
           efficiently. It is designed with a clean and intuitive interface,
