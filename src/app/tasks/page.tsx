@@ -1,97 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
-import { Task } from "../types";
+import React from "react";
 import { TaskForm, TaskList } from "@/components";
-import { useQueryTasks } from "../hooks/tanstack/useQeuryTasks";
-import { useMutateCreateTask } from "../hooks/tanstack/useMutateCreateTask";
-import { useCustomSnackbar } from "@/common/hooks/useCustomSnackbar";
-import { useMutateUpdateTask } from "../hooks/tanstack/useMutateUpdateTask";
-import { useMutateDeleteTask } from "../hooks/tanstack/useMutateDeleteTask";
+import { useTask } from "./hooks/useTask";
 
 const Home: React.FC = () => {
-  const { data: tasks = [], isLoading, isError } = useQueryTasks();
-  const { mutate: createTask } = useMutateCreateTask();
-  const { mutate: updateTask } = useMutateUpdateTask();
-  const { mutate: deleteTask } = useMutateDeleteTask();
-  const { showSuccess, showError } = useCustomSnackbar();
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
-
-  const handleAddTask = async (taskData: {
-    title: string;
-    description: string;
-  }) => {
-    const newTask = {
-      title: taskData.title,
-      description: taskData.description,
-    };
-
-    createTask(newTask, {
-      onError: () => {
-        showError("Error al crear la tarea");
-      },
-      onSuccess: () => {
-        showSuccess("Tarea creada con éxito");
-      },
-    });
-  };
-
-  const handleToggleCompletion = (taskId: number) => {
-    updateTask(
-      {
-        id: taskId.toString(),
-        task: {
-          status: !tasks.find((task) => task._id === taskId)?.status,
-        },
-      },
-      {
-        onError: () => {
-          showError("Error al cambiar el estado de la tarea");
-        },
-        onSuccess: () => {
-          showSuccess("Estado de la tarea cambiado con éxito");
-        },
-      }
-    );
-  };
-
-  const handleEditTask = (task: Task) => {
-    setEditingTask(task);
-  };
-
-  const handleUpdateTask = (
-    taskId: number,
-    updatedData: { title: string; description: string }
-  ) => {
-    updateTask(
-      {
-        id: taskId.toString(),
-        task: updatedData,
-      },
-      {
-        onError: () => {
-          showError("Error al actualizar la tarea");
-        },
-        onSuccess: () => {
-          showSuccess("Tarea actualizada conxito");
-        },
-      }
-    );
-  };
-
-  const handleDeleteTask = (taskId: number) => {
-    deleteTask(taskId.toString(), {
-      onError: () => {
-        showError("Error al eliminar la tarea");
-      },
-      onSuccess: () => {
-        showSuccess("Tarea eliminada conxito");
-      },
-    });
-  };
-
-  const pendingTasks = tasks?.filter((task) => !task.status) || [];
-  const completedTasks = tasks?.filter((task) => task.status) || [];
+  const {
+    isLoading,
+    isError,
+    editingTask,
+    handleAddTask,
+    handleToggleCompletion,
+    handleEditTask,
+    handleUpdateTask,
+    handleDeleteTask,
+    pendingTasks,
+    completedTasks,
+  } = useTask();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -104,9 +29,7 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white py-8 px-4">
       <div className="container mx-auto max-w-5xl">
-        <h1 className="text-4xl font-bold mb-8 text-center">
-          Task Manager
-        </h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">Task Manager</h1>
 
         {/* Formulario */}
         <div className="mb-12">
@@ -116,7 +39,6 @@ const Home: React.FC = () => {
             onUpdateTask={handleUpdateTask}
           />
         </div>
-
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
