@@ -54,6 +54,7 @@ export const useTask = () => {
 
   const handleEditTask = (task: Task) => {
     setEditingTask(task);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleUpdateTask = (
