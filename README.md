@@ -1,4 +1,9 @@
-# Coally Task Manager Frontend 🚀
+
+![Coally Logo](https://coally.com/wp-content/uploads/2023/09/Horizontal-Version-Principal-1.png)
+
+
+
+# Coally - Task Manager Frontend 🚀
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-blue)
@@ -12,7 +17,13 @@ A modern and efficient task management application built as a technical test for
 
 ## 🔗 Live Demo
 
-[**Check out the live demo here**](https://coally-task-manager.vercel.app/) - Deployed on Vercel.
+[**Check out the live demo here**](https://coally-task-manager-frontend-egwjkko4q-julioale21s-projects.vercel.app/) - Deployed on Vercel.
+
+### Test Credentials
+
+Email: test@test.com
+
+Password: Test@123456789
 
 ---
 
