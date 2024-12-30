@@ -1,7 +1,7 @@
 // components/Loading.tsx
 const Loading = () => {
   return (
-    <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="relative">
         {/* Círculo exterior */}
         <div className="w-12 h-12 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin"></div>
