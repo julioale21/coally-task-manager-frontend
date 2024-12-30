@@ -17,7 +17,7 @@ A modern and efficient task management application built as a technical test for
 
 ## 🔗 Live Demo
 
-[**Check out the live demo here**](https://coally-task-manager-frontend-egwjkko4q-julioale21s-projects.vercel.app/) - Deployed on Vercel.
+[**Check out the live demo here**](https://coally-task-manager-frontend-hxdg16qfu-julioale21s-projects.vercel.app/) - Deployed on Vercel.
 
 ### Test Credentials
 
